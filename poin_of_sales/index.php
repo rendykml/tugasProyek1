@@ -11,8 +11,12 @@
 <body>
     <div class="container">
         <h1>Selamat datang</h1>
-        <a href="produk.php">Produk</a>
+        <ul>
+            <li><a href="user.php">Produk</a></li>
+            <li><a href="login.php">Login</a> </li>
+        </ul>
     </div>
+    
 </body>
 
 </html>
