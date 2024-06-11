@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include 'config.php';
+session_start();
 
 if (isset($_POST['simpan'])) {
     // echo var_dump($_POST);
@@ -12,7 +13,7 @@ if (isset($_POST['simpan'])) {
     $jumlah = $_POST['jumlah'];
 
     mysqli_query($dbconnect, "INSERT INTO produk VALUES ('','$nama','$harga','$jumlah')");
-
+    $_SESSION['success'] = "Berhasil menambahkan data";
     header("location:produk.php");
     exit();
 }
