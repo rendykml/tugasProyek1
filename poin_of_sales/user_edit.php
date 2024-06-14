@@ -44,7 +44,7 @@
         $alamat = $_POST['alamat'];
 
         // Melakukan update data user ke dalam database
-        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id', nomor_handphone = '$nomor_handphone', alamat = 'alamat' WHERE id_user='$id'");
+        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id', nomor_handphone = '$nomor_handphone', alamat = '$alamat' WHERE id_user='$id'");
 
         // Mengalihkan halaman kembali ke list user setelah berhasil melakukan update
         header("location:user.php");

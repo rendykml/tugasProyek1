@@ -27,11 +27,10 @@ if (isset($_SESSION['userid']))
 </head>
 
 <body>
-    <div class="container">
-        <h1>Selamat datang <?= $_SESSION['nama_user'] ?> </h1>
-        <a href="produk.php">Produk</a> |
-        <a href="user.php">User</a> |
-        <a href="logout.php">Logout</a>
+    
+    <div>
+    <h1>Selamat datang</h1>
+    <?= $_SESSION['nama_user'] ?>
     </div>
 </body>
 
