@@ -3,7 +3,21 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include 'config.php';
+
+
 session_start();
+
+// membatasi hak akses
+if (isset($_SESSION['userid']))
+// if ($_SESSION['auth'] == 'Yes') 
+{
+    if ($_SESSION['role_id'] == 2) {
+        header("location:kasir.php");
+    }
+} else {
+    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    header("location:login.php");
+}
 
 $view = $dbconnect->query("SELECT u.*, r.nama as nama_role FROM user_pengguna as u INNER JOIN role as r ON u.role_id = r.id_role");
 
@@ -22,12 +36,12 @@ if (!$view) {
 
 <body>
     <div class="container">
-        <?php if(isset($_SESSION['success']) && $_SESSION['success'] != ''){?>
-        <div class="alert alert-success" role="alert">
-           
-            <?=$_SESSION['success']?>
+        <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+            <div class="alert alert-success" role="alert">
 
-        </div>
+                <?= $_SESSION['success'] ?>
+
+            </div>
         <?php }
         $_SESSION['success'] = "";
         ?>
@@ -54,7 +68,7 @@ if (!$view) {
                     <td><?= $row['nama_role'] ?></td>
 
                     <td>
-                        <a href="user_edit.php?id=<?= $row['id_user'] ?>">Edit</a> | <a href="user_hapus.php?id=<?= $row['id_user'] ?>">Hapus</a>
+                        <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-primary">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
             <?php }

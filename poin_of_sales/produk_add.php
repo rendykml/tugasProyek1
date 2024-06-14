@@ -2,8 +2,21 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include 'config.php';
 session_start();
+// membatasi hak akses
+if (isset($_SESSION['userid']))
+// if ($_SESSION['auth'] == 'Yes') 
+{
+    if ($_SESSION['role_id'] == 2) {
+        header("location:kasir.php");
+    }
+} else {
+    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    header("location:login.php");
+}
+
+
+include 'config.php';
 
 if (isset($_POST['simpan'])) {
     // echo var_dump($_POST);
@@ -13,7 +26,7 @@ if (isset($_POST['simpan'])) {
     $jumlah = $_POST['jumlah'];
 
     mysqli_query($dbconnect, "INSERT INTO produk VALUES ('','$nama','$harga','$jumlah')");
-    $_SESSION['success'] = "Berhasil menambahkan data";
+
     header("location:produk.php");
     exit();
 }

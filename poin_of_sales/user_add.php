@@ -4,6 +4,19 @@ ini_set('display_errors', 1);
 
 include 'config.php';
 session_start();
+// membatasi hak akses
+if (isset($_SESSION['userid']))
+// if ($_SESSION['auth'] == 'Yes') 
+{
+    if ($_SESSION['role_id'] == 2) {
+        header("location:kasir.php");
+    }
+} else {
+    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    header("location:login.php");
+}
+
+
 
 $role = mysqli_query($dbconnect, "SELECT * FROM role");
 
@@ -52,10 +65,10 @@ if (isset($_POST['simpan'])) {
                 <label>Role Akses</label>
                 <select class="form-control" name="role_id">Pilih Role Akses
                     <option value="">Pilih Role Akses</option>
-                <?php 
-                 while($row = mysqli_fetch_array($role)) {?>
-                 <option value="<?=$row['id_role'] ?>"><?=$row['nama'] ?></opsion>
-                <?php }?>
+                    <?php
+                    while ($row = mysqli_fetch_array($role)) { ?>
+                        <option value="<?= $row['id_role'] ?>"><?= $row['nama'] ?></opsion>
+                        <?php } ?>
                 </select>
             </div>
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">

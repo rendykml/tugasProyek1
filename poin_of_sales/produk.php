@@ -3,7 +3,19 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include 'config.php';
+
 session_start();
+// membatasi hak akses
+if (isset($_SESSION['userid']))
+// if ($_SESSION['auth'] == 'Yes') 
+{
+    if ($_SESSION['role_id'] == 2) {
+        header("location:kasir.php");
+    }
+} else {
+    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    header("location:login.php");
+}
 
 $view = $dbconnect->query("SELECT * FROM produk");
 
@@ -22,15 +34,6 @@ if (!$view) {
 
 <body>
     <div class="container">
-        <?php if(isset($_SESSION['success']) && $_SESSION['success'] != ''){?>
-        <div class="alert alert-success" role="alert">
-           
-            <?=$_SESSION['success']?>
-
-        </div>
-        <?php }
-        $_SESSION['success'] = "";
-        ?>
         <h1>List Produk</h1>
         <a href="produk_add.php" class="btn btn-primary">Tambah data</a>
         <table class="table table-bordered">
