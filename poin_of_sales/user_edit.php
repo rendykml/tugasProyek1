@@ -10,7 +10,7 @@
             header("location:kasir.php");
         }
     } else {
-        $_SESSION['error'] = 'anda harus login terlebih dahulu';
+        $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
         header("location:login.php");
     }
 
@@ -40,9 +40,11 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         $role_id = $_POST['role_id'];
+        $nomor_handphone = $_POST['nomor_handphone'];
+        $alamat = $_POST['alamat'];
 
         // Melakukan update data user ke dalam database
-        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id' WHERE id_user='$id'");
+        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id', nomor_handphone = '$nomor_handphone', alamat = 'alamat' WHERE id_user='$id'");
 
         // Mengalihkan halaman kembali ke list user setelah berhasil melakukan update
         header("location:user.php");
@@ -84,6 +86,14 @@
                             <option value="<?= $row['id_role'] ?>" <?= $row['id_role'] == $data['role_id'] ? 'selected' : '' ?>><?= $row['nama'] ?></opsion>
                             <?php } ?>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>Nomor HP</label>
+                    <input type="text" name="nomor_handphone" class="form-control" placeholder="Nomor hp" value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                </div>
+                <div class="form-group">
+                    <label>Alamat</label>
+                    <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?= isset($data['alamat']) ? $data['alamat'] : '' ?>">
                 </div>
                 <input type="submit" name="update" value="Perbaharui" class="btn btn-primary">
                 <a href="user.php" class="btn btn-warning">Kembali</a>

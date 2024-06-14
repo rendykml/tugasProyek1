@@ -10,7 +10,7 @@ if (isset($_SESSION['userid']))
         header("location:kasir.php");
     }
 } else {
-    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
     header("location:login.php");
 }
 
