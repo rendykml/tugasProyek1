@@ -15,7 +15,7 @@ if (isset($_SESSION['userid']))
         header("location:kasir.php");
     }
 } else {
-    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
     header("location:login.php");
 }
 
@@ -54,6 +54,8 @@ if (!$view) {
                 <th>Username</th>
                 <th>Password</th>
                 <th>Role Akses</th>
+                <th>Nomor HP</th>
+                <th>Alamat</th>
                 <th>Aksi</th>
             </tr>
             <?php
@@ -66,6 +68,8 @@ if (!$view) {
                     <td><?= $row['username'] ?></td>
                     <td><?= $row['password'] ?></td>
                     <td><?= $row['nama_role'] ?></td>
+                    <td><?= $row['nomor_handphone'] ?></td>
+                    <td><?= $row['alamat'] ?></td>
 
                     <td>
                         <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-primary">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>

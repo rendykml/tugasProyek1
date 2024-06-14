@@ -12,7 +12,7 @@ if (isset($_SESSION['userid']))
         header("location:kasir.php");
     }
 } else {
-    $_SESSION['error'] = 'anda harus login terlebih dahulu';
+    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
     header("location:login.php");
 }
 
@@ -27,8 +27,10 @@ if (isset($_POST['simpan'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role_id = $_POST['role_id'];
+    $nomor_handphone = $_POST['nomor_handphone'];
+    $alamat = $_POST['alamat'];
 
-    mysqli_query($dbconnect, "INSERT INTO user_pengguna VALUES ( '','$nama','$username','$password','$role_id')");
+    mysqli_query($dbconnect, "INSERT INTO user_pengguna VALUES ( '','$nama','$username','$password','$role_id', '$nomor_handphone', '$alamat')");
     $_SESSION['success'] = "Berhasil menambahkan data";
     header("location:user.php");
     exit();
@@ -70,6 +72,14 @@ if (isset($_POST['simpan'])) {
                         <option value="<?= $row['id_role'] ?>"><?= $row['nama'] ?></opsion>
                         <?php } ?>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Nomor Hp</label>
+                <input type="text" name="nomor_handphone" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>Alamat</label>
+                <input type="text" name="alamat" class="form-control" placeholder="">
             </div>
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
             <a href="user.php" class="btn btn-warning">Kembali</a>
