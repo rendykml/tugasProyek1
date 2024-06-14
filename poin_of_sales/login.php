@@ -18,6 +18,7 @@ if (isset($_POST['masuk'])) {
         } else {
             $_SESSION['userid'] = $data['id_user'];
             $_SESSION['nama_user'] = $data['nama_user'];
+            $_SESSION['username'] = $data['username'];
             $_SESSION['role_id'] = $data['role_id'];
 
             header("location:index.php");
