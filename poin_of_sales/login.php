@@ -50,15 +50,7 @@ if (isset($_POST['masuk'])) {
 
 <body>
     <div class="container-fluid">
-        <!--  Allert    -->
-        <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
-            <div class="alert alert-danger" role="alert">
-                <?= $_SESSION['error'] ?>
-            </div>
-        <?php
-        }
-        $_SESSION['error'] = '';
-        ?>
+      
     <form method="post" class="mx-auto ">
         <h1 class="text-center">Login</h1>
         <div class="mb-3 mt-5">
@@ -69,7 +61,18 @@ if (isset($_POST['masuk'])) {
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <p><i class="allert">*Login terlebih dahulu</i></p>
+        <!--  Allert    -->
+        <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
+                
+            <div class="alert" role="alert">
+                *Login terlebih dahulu!
+            </div>
+            
+        <?php
+        }
+        $_SESSION['error'] = '';
+        ?>
+        
         <button type="submit" name="masuk" value="Masuk" class="btn btn-primary">Masuk</button>
     </form>
     </div>
