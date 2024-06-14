@@ -39,11 +39,17 @@ if (isset($_POST['masuk'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous"
+    >
+   <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <!--  Allert    -->
         <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
             <div class="alert alert-danger" role="alert">
@@ -53,19 +59,19 @@ if (isset($_POST['masuk'])) {
         }
         $_SESSION['error'] = '';
         ?>
-
-        <h1>Login</h1>
-        <form method="post">
-            <div class="form-groupby">
-                <label for="exampleInputEmail">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="username">
-            </div>
-            <div class="form-groupby">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="password">
-            </div>
-            <input type="submit" name="masuk" value="Masuk" class="btn btn-primary">
-        </form>
+    <form method="post" class="mx-auto ">
+        <h1 class="text-center">Login</h1>
+        <div class="mb-3 mt-5">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <p><i class="allert">*Login terlebih dahulu</i></p>
+        <button type="submit" name="masuk" value="Masuk" class="btn btn-primary">Masuk</button>
+    </form>
     </div>
 
 </body>
