@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 include 'config.php';
 
 session_start();
-include 'auth_kasircheck.php';
+include 'auth_admincheck.php';
 
 
 $view = $dbconnect->query("SELECT * FROM produk");

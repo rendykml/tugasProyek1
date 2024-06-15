@@ -46,7 +46,7 @@ if (isset($_POST['update'])) { // Cek apakah form telah disubmit dengan tombol "
 
 <body>
     <div class="container">
-        <h1>Tambah Produk</h1>
+        <h1>Edit Produk</h1>
         <form method="post">
             <input type="hidden" name="id_produk" value="<?= isset($data['id_produk']) ? $data['id_produk'] : '' ?>">
             <div class="form-group">
