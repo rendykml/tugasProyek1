@@ -5,17 +5,8 @@ ini_set('display_errors', 1);
 include 'config.php';
 
 session_start();
-// membatasi hak akses
-if (isset($_SESSION['userid']))
-// if ($_SESSION['auth'] == 'Yes') 
-{
-    if ($_SESSION['role_id'] == 2) {
-        header("location:kasir.php");
-    }
-} else {
-    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
-    header("location:login.php");
-}
+include 'auth_kasircheck.php';
+
 
 $view = $dbconnect->query("SELECT * FROM produk");
 
@@ -29,14 +20,9 @@ if (!$view) {
 
 <head>
     <title>List Produk</title>
-    <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style/admin.css">
-    <link 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-    rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -116,7 +102,7 @@ if (!$view) {
                                 <td><?= $row['jumlah'] ?></td>
                                 <td class="">
                                     <!-- Link Edit dan Hapus -->
-                                    <a class="btn btn-primary" href="produk_edit.php?id=<?= $row['id_produk'];?>">Edit</a>
+                                    <a class="btn btn-primary" href="produk_edit.php?id=<?= $row['id_produk']; ?>">Edit</a>
                                     <a class="btn btn-danger" href="produk_hapus.php?id=<?= $row['id_produk'] ?>">Hapus</a>
                                 </td>
                             </tr>
