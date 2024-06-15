@@ -74,8 +74,12 @@ if (isset($_POST['simpan'])) {
                 </select>
             </div>
             <div class="form-group">
-                <label>Nomor Hp</label>
-                <input type="text" name="nomor_handphone" class="form-control" placeholder="">
+
+                <label>Nomor HP</label>
+                <input type="tel" name="nomor_handphone" class="form-control" placeholder="" pattern="\+628[0-9]{8,12}" required>
+                <small>Format: (+62), berisi 8-12 digit</small>
+                <br><br>
+
             </div>
             <div class="form-group">
                 <label>Alamat</label>

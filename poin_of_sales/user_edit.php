@@ -89,7 +89,9 @@
                 </div>
                 <div class="form-group">
                     <label>Nomor HP</label>
-                    <input type="text" name="nomor_handphone" class="form-control" placeholder="Nomor hp" value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                    <input type="tel" name="nomor_handphone" class="form-control" placeholder="" pattern="\+628[0-9]{8,12}" required value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                    <small>Format: (+62), berisi 8-12 digit</small>
+                    <br><br>
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>

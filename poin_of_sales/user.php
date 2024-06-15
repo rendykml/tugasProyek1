@@ -31,19 +31,13 @@ if (!$view) {
 
 <head>
     <title>List Users</title>
-    <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style/admin.css">
-    <link 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-    rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-<div class="main-container d-flex">
+    <div class="main-container d-flex">
         <!-- Sidebar -->
         <div class="sidebar bg-dark text-white" id="side_nav">
             <div class="header-box px-2 pt-3 pb-4">
@@ -94,52 +88,52 @@ if (!$view) {
             </nav>
 
             <div class="container">
-        <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-            <div class="alert alert-success" role="alert">
+                <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                    <div class="alert alert-success" role="alert">
 
-                <?= $_SESSION['success'] ?>
+                        <?= $_SESSION['success'] ?>
 
+                    </div>
+                <?php }
+                $_SESSION['success'] = "";
+                ?>
+                <h1 class="mt-3">List User</h1>
+                <a href="user_add.php" class="btn btn-primary">Tambah data</a>
+                <table class="table table-bordered mt-3">
+                    <tr>
+                        <th>ID Users</th>
+                        <th>Nama_User</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Role Akses</th>
+                        <th>Nomor HP</th>
+                        <th>Alamat</th>
+                        <th>Aksi</th>
+                    </tr>
+                    <?php
+
+                    while ($row = $view->fetch_array()) { ?>
+
+                        <tr>
+                            <td><?= $row['id_user'] ?></td>
+                            <td><?= $row['nama_user'] ?></td>
+                            <td><?= $row['username'] ?></td>
+                            <td><?= $row['password'] ?></td>
+                            <td><?= $row['nama_role'] ?></td>
+                            <td><?= $row['nomor_handphone'] ?></td>
+                            <td><?= $row['alamat'] ?></td>
+
+                            <td>
+                                <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-primary">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php }
+                    ?>
+                </table>
             </div>
-        <?php }
-        $_SESSION['success'] = "";
-        ?>
-        <h1 class="mt-3">List User</h1>
-        <a href="user_add.php" class="btn btn-primary">Tambah data</a>
-        <table class="table table-bordered mt-3">
-            <tr>
-                <th>ID Users</th>
-                <th>Nama_User</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Role Akses</th>
-                <th>Nomor HP</th>
-                <th>Alamat</th>
-                <th>Aksi</th>
-            </tr>
-            <?php
+            <!-- /Content -->
+        </div>
 
-            while ($row = $view->fetch_array()) { ?>
-
-                <tr>
-                    <td><?= $row['id_user'] ?></td>
-                    <td><?= $row['nama_user'] ?></td>
-                    <td><?= $row['username'] ?></td>
-                    <td><?= $row['password'] ?></td>
-                    <td><?= $row['nama_role'] ?></td>
-                    <td><?= $row['nomor_handphone'] ?></td>
-                    <td><?= $row['alamat'] ?></td>
-
-                    <td>
-                        <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-primary">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>
-                    </td>
-                </tr>
-            <?php }
-            ?>
-        </table>
-    </div>
-        <!-- /Content -->
-    </div>
-    
 </body>
 
 </html>
