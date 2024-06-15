@@ -1,16 +1,16 @@
 <?php
+include 'config.php';
 session_start();
 
-// membatasi hak akses
-if (isset($_SESSION['userid']))
-// if ($_SESSION['auth'] == 'Yes') 
-{
-    if ($_SESSION['role_id'] == 1) {
-        header("location:index.php");
+include 'auth_kasircheck.php';
+
+$produk = mysqli_query($dbconnect, "SELECT * FROM produk");
+print_r($_SESSION);
+$sum = 0;
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $key => $value) {
+        $sum += $value['harga'] * (int)$value['jumlah'];
     }
-} else {
-    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
-    header("location:login.php");
 }
 
 ?>
@@ -27,9 +27,60 @@ if (isset($_SESSION['userid']))
 
 <body>
     <div class="container">
-        <h1>Kasir</h1>
-        <h2>Hi <?= $_SESSION['nama_user'] ?></h2>
-        <a href="logout.php">logout</a>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Kasir</h1>
+                <h2>Hi <?= $_SESSION['nama_user'] ?></h2>
+                <a href="logout.php">logout</a> |
+                <a href="reset_keranjang.php">Reset Keranjang</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post" action="keranjang_action.php" class="form-inline">
+                <div class="input-group">
+                    <select class="form-control" name="id_produk">
+                        <option value="">Pilih Produk</option>
+                        <?php while ($row = mysqli_fetch_array($produk)) { ?>
+                            <option value="<?= $row['id_produk'] ?>"><?= $row['nama_produk'] ?></option>
+                        <?php } ?>
+                    </select>
+
+                </div>
+                <div class="input-group">
+                    <input type="number" name="jumlah" class="form-control" placeholder="jumlah">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Tambah</button>
+                    </span>
+                </div>
+            </form>
+            <br>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Sub Total</th>
+                    <th></th>
+                </tr>
+                <?php foreach ($_SESSION['cart'] as $key => $value) { ?>
+                    <tr>
+                        <td><?= $value['nama'] ?></td>
+                        <td align="right"><?= number_format($value['harga']) ?></td>
+                        <td><?= (int)$value['jumlah'] ?></td>
+                        <td align="right"><?= number_format((int)$value['jumlah'] * $value['harga']) ?></td>
+                        <td><a href="keranjang_hapus.php" id="<?= $value['id'] ?>" class="btn btn-danger"><i class="glyphicon-remove"></i></a></td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h3>Total <?= number_format($sum) ?></h3>
+
+        </div>
+
     </div>
 
 </body>

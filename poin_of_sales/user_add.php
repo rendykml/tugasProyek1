@@ -4,17 +4,7 @@ ini_set('display_errors', 1);
 
 include 'config.php';
 session_start();
-// membatasi hak akses
-if (isset($_SESSION['userid']))
-// if ($_SESSION['auth'] == 'Yes') 
-{
-    if ($_SESSION['role_id'] == 2) {
-        header("location:kasir.php");
-    }
-} else {
-    $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
-    header("location:login.php");
-}
+include 'auth_admincheck.php';
 
 
 
@@ -53,19 +43,19 @@ if (isset($_POST['simpan'])) {
         <form action="" method="post">
             <div class="form-group">
                 <label>Nama User</label>
-                <input type="text" name="nama_user" class="form-control" placeholder="">
+                <input type="text" name="nama_user" class="form-control" placeholder="" required>
             </div>
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control" placeholder="">
+                <input type="text" name="username" class="form-control" placeholder="" required>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="text" name="password" class="form-control" placeholder="">
+                <input type="text" name="password" class="form-control" placeholder="" required>
             </div>
             <div class="form-group">
                 <label>Role Akses</label>
-                <select class="form-control" name="role_id">Pilih Role Akses
+                <select class="form-control" name="role_id" required>Pilih Role Akses
                     <option value="">Pilih Role Akses</option>
                     <?php
                     while ($row = mysqli_fetch_array($role)) { ?>
@@ -74,12 +64,16 @@ if (isset($_POST['simpan'])) {
                 </select>
             </div>
             <div class="form-group">
-                <label>Nomor Hp</label>
-                <input type="text" name="nomor_handphone" class="form-control" placeholder="">
+
+                <label>Nomor HP</label>
+                <input type="tel" name="nomor_handphone" class="form-control" placeholder="" pattern="\+628[0-9]{8,12}" required>
+                <small>Format: +628 (contoh: +62881122334), harus 8-12 digit</small>
+                <br><br>
+
             </div>
             <div class="form-group">
                 <label>Alamat</label>
-                <input type="text" name="alamat" class="form-control" placeholder="">
+                <input type="text" name="alamat" class="form-control" placeholder="" required>
             </div>
             <input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
             <a href="user.php" class="btn btn-warning">Kembali</a>

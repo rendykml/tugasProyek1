@@ -2,17 +2,7 @@
     include 'config.php';
 
     session_start();
-    // membatasi hak akses
-    if (isset($_SESSION['userid']))
-    // if ($_SESSION['auth'] == 'Yes') 
-    {
-        if ($_SESSION['role_id'] == 2) {
-            header("location:kasir.php");
-        }
-    } else {
-        $_SESSION['error'] = '<i>*Login terlebih dahulu!</i>';
-        header("location:login.php");
-    }
+    include 'auth_admincheck.php';
 
 
 
@@ -44,7 +34,7 @@
         $alamat = $_POST['alamat'];
 
         // Melakukan update data user ke dalam database
-        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id', nomor_handphone = '$nomor_handphone', alamat = 'alamat' WHERE id_user='$id'");
+        mysqli_query($dbconnect, "UPDATE user_pengguna SET nama_user='$nama', username ='$username', password='$password', role_id = '$role_id', nomor_handphone = '$nomor_handphone', alamat = '$alamat' WHERE id_user='$id'");
 
         // Mengalihkan halaman kembali ke list user setelah berhasil melakukan update
         header("location:user.php");
@@ -67,19 +57,19 @@
                 <input type="hidden" name="id_user" value="<?= isset($data['id_user']) ? $data['id_user'] : '' ?>">
                 <div class="form-group">
                     <label>Nama User</label>
-                    <input type="text" name="nama_user" class="form-control" placeholder="Nama User" value="<?= isset($data['nama_user']) ? $data['nama_user'] : '' ?>">
+                    <input type="text" name="nama_user" class="form-control" placeholder="Nama User" value="<?= isset($data['nama_user']) ? $data['nama_user'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?= isset($data['username']) ? $data['username'] : '' ?>">
+                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?= isset($data['username']) ? $data['username'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="text" name="password" class="form-control" placeholder="Password" value="<?= isset($data['password']) ? $data['password'] : '' ?>">
+                    <input type="text" name="password" class="form-control" placeholder="Password" value="<?= isset($data['password']) ? $data['password'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Role Akses</label>
-                    <select class="form-control" name="role_id">Pilih Role Akses
+                    <select class="form-control" name="role_id" required>Pilih Role Akses
                         <option value="">Pilih Role Akses</option>
                         <?php
                         while ($row = mysqli_fetch_array($role)) { ?>
@@ -89,11 +79,13 @@
                 </div>
                 <div class="form-group">
                     <label>Nomor HP</label>
-                    <input type="text" name="nomor_handphone" class="form-control" placeholder="Nomor hp" value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                    <input type="tel" name="nomor_handphone" class="form-control" placeholder="" pattern="\+628[0-9]{8,12}" required value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                    <small>Format: (+62), berisi 8-12 digit</small>
+                    <br><br>
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>
-                    <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?= isset($data['alamat']) ? $data['alamat'] : '' ?>">
+                    <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?= isset($data['alamat']) ? $data['alamat'] : '' ?>" required>
                 </div>
                 <input type="submit" name="update" value="Perbaharui" class="btn btn-primary">
                 <a href="user.php" class="btn btn-warning">Kembali</a>
