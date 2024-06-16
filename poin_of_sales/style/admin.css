@@ -3,6 +3,7 @@
         body {
             background: white;
             font-family: 'Poppins', 'sans-serif';
+            box-sizing: content-box;
         }
 
         #side_nav {
@@ -55,7 +56,6 @@
         #top_nav {
             /* background-color: #FF8C00; Warna oranye yang lebih terang */
             border-radius: 8px;
-            background-color: rgb(230, 224, 224);
             
 
             

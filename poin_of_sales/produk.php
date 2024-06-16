@@ -27,6 +27,7 @@ if (!$view) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="style/admin.js"></script>
 </head>
 
 <body>
@@ -48,7 +49,7 @@ if (!$view) {
         <div class="content flex-grow-1 p-1 rounded ">
             <nav class="navbar navbar-expand-lg p-2 bg-light" id="top_nav" >
                 <div class="container-fluid">
-                    <a class="navbar-brand text-black ps-4 " href="#"><i>Point Of Sales</i></a>
+                    <a class="navbar-brand text-black ps-4 " href="index.php"><i>Point Of Sales</i></a>
 
                     <div class="collapse navbar-collapse justify-content-end">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -116,12 +117,10 @@ if (!$view) {
         <!-- /Content -->
     </div>
 
-    <!-- Muat skrip di akhir body untuk memastikan DOM telah dimuat sepenuhnya sebelum mereka dijalankan -->
-    <script src="style/admin.js"></script>
         </div>
     </div>
 
-    <!-- Muat skrip di akhir body untuk memastikan DOM telah dimuat sepenuhnya sebelum mereka dijalankan -->
+   
     
             
 </body>

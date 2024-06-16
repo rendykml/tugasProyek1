@@ -47,7 +47,7 @@ if (!$view) {
         <div class="content flex-grow-1 p-1 rounded ">
             <nav class="navbar navbar-expand-lg p-2 bg-light" id="top_nav" >
                 <div class="container-fluid">
-                    <a class="navbar-brand text-black ps-4 " href="#"><i>Point Of Sales</i></a>
+                    <a class="navbar-brand text-black ps-4 " href="index.php"><i>Point Of Sales</i></a>
 
                     <div class="collapse navbar-collapse justify-content-end">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -119,7 +119,7 @@ if (!$view) {
         </div>
     </div>
 
-    <!-- Muat skrip di akhir body untuk memastikan DOM telah dimuat sepenuhnya sebelum mereka dijalankan -->
+    
 
             
 </body>
