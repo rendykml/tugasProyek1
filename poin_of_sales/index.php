@@ -43,7 +43,7 @@ include 'auth_admincheck.php';
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">
-                                    Halo <?= $_SESSION['username']; ?>
+                                    username: <?= $_SESSION['username']; ?>
                                 </a>
                             </li>
                             <li class="nav-item">
