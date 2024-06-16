@@ -27,9 +27,9 @@ include 'auth_admincheck.php';
                 </h1>
             </div>
             <ul class="list-unstyled px-2">
-                <li class="mt-3"><a class="text-decoration-none text-white" href="#"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class="mt-3"><a class="text-decoration-none text-white" href="user.php"><i class="fa-solid fa-user"></i> User</a></li>
-                <li class="mt-3"><a class="text-decoration-none text-white" href="produk.php"><i class="fa-solid fa-list-check"></i> Produk</a></li>
+                <li class="mt-3"><a class="text-decoration-none " href="index.php" id="dashboard-link" ><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li class="mt-3"><a class="text-decoration-none " href="user.php" id="user-link" ><i class="fa-solid fa-user"></i> User</a></li>
+                <li class="mt-3"><a class="text-decoration-none " href="produk.php" id="produk-link" ><i class="fa-solid fa-list-check"></i> Produk</a></li>
             </ul>
         </div>
 
@@ -54,9 +54,36 @@ include 'auth_admincheck.php';
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav>  
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ambil semua link dalam sidebar
+            const links = document.querySelectorAll('.sidebar ul a');
+
+            // Tambahkan event listener untuk setiap link
+            links.forEach(link => {
+                link.addEventListener('click', function () {
+                    // Hapus kelas active dari semua link
+                    links.forEach(link => link.classList.remove('active'));
+
+                    // Tambahkan kelas active ke link yang diklik
+                    this.classList.add('active');
+                });
+            });
+
+            // Tambahkan logika untuk mempertahankan status aktif pada muatan halaman
+            const currentPage = window.location.pathname.split('/').pop();
+            if (currentPage === 'index.php') {
+                document.getElementById('dashboard-link').classList.add('active');
+            } else if (currentPage === 'user.php') {
+                document.getElementById('user-link').classList.add('active');
+            } else if (currentPage === 'produk.php') {
+                document.getElementById('produk-link').classList.add('active');
+            }
+        });
+    </script>
 
 
 </body>
