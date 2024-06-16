@@ -6,7 +6,7 @@ include 'auth_kasircheck.php';
 $id = $_GET['id'];
 
 $cart = $_SESSION['cart'];
-// print_r($cart);
+//      print_r($cart);
 $k = array_filter($cart, function ($var) use ($id) {
     return ($var['id'] == $id);
 });
@@ -20,6 +20,6 @@ foreach ($k as $key => $value) {
     $_SESSION['cart'] = array_values($_SESSION['cart']);
     break;
 }
-    
+
 
 header('location:kasir.php');
