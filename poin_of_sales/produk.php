@@ -77,10 +77,10 @@ if (!$view) {
             </nav>
 
             <!-- Main Content -->
-            <div class="container mt-3">
+            <div class="container mt-3 ms-3 ">
                 <h1>List Produk</h1>
                 <a href="produk_add.php" class="btn btn-primary">Tambah data</a>
-                <table class="table table-bordered mt-3">
+                <table class="table table mt-3">
                     <thead>
                         <tr>
                             <th>ID Produk</th>

@@ -77,7 +77,7 @@ if (!$view) {
                 </div>
             </nav>
 
-            <div class="container">
+            <div class="container ms-3">
                 <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
                     <div class="alert alert-success" role="alert">
 
@@ -89,7 +89,7 @@ if (!$view) {
                 ?>
                 <h1 class="mt-3">List User</h1>
                 <a href="user_add.php" class="btn btn-primary">Tambah data</a>
-                <table class="table table-bordered mt-3">
+                <table class="table mt-3">
                     <tr>
                         <th>ID Users</th>
                         <th>Nama_User</th>
@@ -105,7 +105,7 @@ if (!$view) {
                     while ($row = $view->fetch_array()) { ?>
 
                         <tr>
-                            <td><?= $row['id_user'] ?></td>
+                            <th><?= $row['id_user'] ?></th>
                             <td><?= $row['nama_user'] ?></td>
                             <td><?= $row['username'] ?></td>
                             <td><?= $row['password'] ?></td>
