@@ -19,6 +19,6 @@ if (isset($_POST['id_produk'])) {
     ];
 
     $_SESSION['cart'][] = $barang;
-    krsort($_SESSION['cart']);
+    // krsort($_SESSION['cart']);
     header('location:kasir.php');
 }
