@@ -21,7 +21,7 @@ if (isset($_POST['simpan'])) {
     $alamat = $_POST['alamat'];
 
     mysqli_query($dbconnect, "INSERT INTO user_pengguna VALUES ( '','$nama','$username','$password','$role_id', '$nomor_handphone', '$alamat')");
-    $_SESSION['success'] = "Berhasil menambahkan data";
+    $_SESSION['success'] = "Berhasil menambahkan user";
     header("location:user.php");
     exit();
 }

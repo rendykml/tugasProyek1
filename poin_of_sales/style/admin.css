@@ -8,6 +8,8 @@
         #side_nav {
             min-width: 250px;
             max-width: 250px;
+            /* box-shadow: black;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3); Shadow hanya di sisi kanan */
         }
 
         .content {
@@ -27,7 +29,7 @@
         .sidebar ul a:hover {
             background-color: rgb(232, 127, 9);
             padding-left: 20px;
-            border-radius: 3px;
+            border-radius: 10px;
             color: black;
         }
 
@@ -43,3 +45,25 @@
         #orange {
             background-color: rgb(232, 127, 9);
         }
+
+        /* Tambahkan gaya CSS tambahan di sini */
+        .profile-dropdown .dropdown-toggle .fa-solid {
+            font-size: 1.5rem; /* Atur ukuran ikon profil di sini */
+
+        }
+       
+        #top_nav {
+            /* background-color: #FF8C00; Warna oranye yang lebih terang */
+            border-radius: 8px;
+            background-color: rgb(230, 224, 224);
+            
+
+            
+        }
+
+        /* li a {
+            border-radius: 12px;
+            border: rgb(232, 127, 9);
+            } */
+        
+        

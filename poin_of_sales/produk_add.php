@@ -16,7 +16,7 @@ if (isset($_POST['simpan'])) {
     $jumlah = $_POST['jumlah'];
 
     mysqli_query($dbconnect, "INSERT INTO produk VALUES ('','$nama','$harga','$jumlah')");
-
+    $_SESSION['success'] = "Berhasil menambahkan Produk";
     header("location:produk.php");
     exit();
 }
