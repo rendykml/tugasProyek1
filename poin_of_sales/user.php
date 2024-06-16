@@ -32,8 +32,8 @@ if (!$view) {
         <div class="sidebar bg-dark text-white" id="side_nav">
             <div class="header-box px-2 pt-3 pb-4">
                 <h1 class="fs-4">
-                    <span class="bg-white text-dark rounded shadow px-2 me-2">POS</span>
-                    <span class="text-white">Point of Sale</span>
+                    <span class="text-dark rounded shadow px-2 me-2"id='orange' >POS</span>
+                    <span class="text-white"><i> Point of Sale</i></span>
                 </h1>
             </div>
             <ul class="list-unstyled px-2">
