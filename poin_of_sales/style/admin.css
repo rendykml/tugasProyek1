@@ -49,8 +49,11 @@
 
         /* Tambahkan gaya CSS tambahan di sini */
         .profile-dropdown .dropdown-toggle .fa-solid {
-            font-size: 1.5rem; /* Atur ukuran ikon profil di sini */
+            font-size: 2rem; /* Atur ukuran ikon profil di sini */
 
+        }
+        .fa-hands {
+            font-size: 3rem;
         }
        
         #top_nav {
