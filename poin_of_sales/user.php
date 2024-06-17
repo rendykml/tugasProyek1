@@ -69,7 +69,7 @@ if (!$view) {
                     </div>
                 </div>
             </nav>
-            <div class="container mb-1 ms-3">
+            <div class="container mt-1 ms-3">
                 <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
                     <div class="alert alert-success" role="alert">
 

@@ -28,6 +28,8 @@ if (isset($_POST['update'])) { // Cek apakah form telah disubmit dengan tombol "
     // Melakukan update data barang ke dalam database
     mysqli_query($dbconnect, "UPDATE produk SET nama_produk='$nama', harga='$harga', jumlah='$jumlah' WHERE id_produk='$id_produk'");
 
+    $_SESSION['success'] = "Berhasil merubah produk";
+
     // Mengalihkan halaman kembali ke list barang setelah berhasil melakukan update
     header("location:produk.php");
 }
