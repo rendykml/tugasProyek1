@@ -12,7 +12,7 @@ $role = mysqli_query($dbconnect, "SELECT * FROM role");
 
 if (isset($_POST['simpan'])) {
     // echo var_dump($_POST);
-    echo "Form subbmitted<br>";
+    // echo "Form subbmitted<br>";
     $nama = $_POST['nama_user'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -24,46 +24,46 @@ if (isset($_POST['simpan'])) {
     $_SESSION['success'] = "Berhasil menambahkan user";
     header("location:user.php");
     exit();
-}
+    }
 ?>
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Point of Sale - Tambah User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/admin.css">
+    <title>List Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="style/admin.js"></script>
+    <script src="style/admin.js" ></script>
+    <link rel="stylesheet" href="style/admin-flex.css">
+    <link rel="stylesheet" href="style/admin.css">
+   
+  
+    </style>
 </head>
 
 <body>
-    <div class="main-container d-flex">
+    <div class="main-container">
         <div class="sidebar bg-dark text-white" id="side_nav">
-            <div class="header-box px-1 mt-4 mb-5">
+            <div class="header-box text-center">
                 <h1 class="fs-4">
-                    <span class="text-dark rounded shadow px-2 ms-1 me-1" id="orange">POS</span>
+                    <span class="text-dark rounded shadow px-2 me-1" id="orange">POS</span>
                     <span class="text-white"><i>Menu Admin</i></span>
                 </h1>
             </div>
             <ul class="list-unstyled px-2">
-                <li class="mt-3"><a class="text-decoration-none" href="index.php" id="dashboard-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class="mt-3"><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-users"></i> Users</a></li>
-                <li class="mt-3"><a class="text-decoration-none" href="produk.php" id="produk-link"><i class="fa-solid fa-list-check"></i> Produk</a></li>
+                <li><a class="text-decoration-none" href="index.php" id="dashboard-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-users"></i> Users</a></li>
+                <li><a class="text-decoration-none" href="produk.php" id="produk-link"><i class="fa-solid fa-list-check"></i> Produk</a></li>
             </ul>
         </div>
 
-        <div class="content flex-grow-1 p-1">
-            <nav class="navbar navbar-expand-lg m-2 p-2 bg-light" id="top_nav">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-black ps-4" href="index.php"><h4><i>Point Of Sales</i></h4></a>
-
+        <div class="content">
+            <nav class="navbar navbar-expand-lg bg-light " id="top_nav">
+                <div class="container-fluid pt-2 ps-4 " >
+                    <a class="navbar-brand text-black" href="index.php"><h4><i>Point Of Sales</i></h4></a>
                     <div class="collapse navbar-collapse justify-content-end">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown profile-dropdown p-1 me-2">
@@ -73,9 +73,7 @@ if (isset($_POST['simpan'])) {
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                     <li><a class="dropdown-item" href="index.php"><?= $_SESSION['nama_user']; ?></a></li>
                                     <li><a class="dropdown-item" href="index.php">user : <?= $_SESSION['username']; ?></a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
                                 </ul>
                             </li>
@@ -83,49 +81,55 @@ if (isset($_POST['simpan'])) {
                     </div>
                 </div>
             </nav>
-
-            <div class="container mt-3 mx-2 bg-light p-4 ">
-                <h1>Tambah User</h1>
-                <form class="" action="" method="post">
-                    <div class="form-group mt-1 ">
-                        <label>Nama User</label>
-                        <input type="text" name="nama_user" class="form-control" placeholder="" required>
+            <div class="container px-auto w-50 ">
+                <div class="card my-4 border-none ">
+                    <div class="card-header text-center">
+                        <h1>Tambah User</h1>
                     </div>
-                    <div class="form-group mt-1 ">
-                        <label>Username</label>
-                        <input type="text" name="username" class="form-control" placeholder="" required>
+                    <div class="card-body">
+                    <form action="" method="post">
+                        <div class="form-group mb-4">
+                            <label>Nama User :</label>
+                            <input type="text" name="nama_user" class="form-control" placeholder="" required>
+                        </div>
+                        <div class="input-group mb-4">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                            <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" name="password" class="form-control" placeholder="masukan password" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                           
+                        </div>   
+                        
+                        <div class="input-group mb-4">
+                            <label class="input-group-text" for="inputGroupSelect01"><i class="fa-solid fa-key fa-fade"></i></label>
+                            <select class="form-select" id="inputGroupSelect01" name="role_id" required>
+                                <option value="">Pilih Role</option>
+                                <?php
+                                while ($row = mysqli_fetch_array($role)) { ?>
+                                    <option value="<?= $row['id_role'] ?>"><?= $row['nama']?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label><i class="fa-solid fa-phone ms-2 me-1"></i> Nomor HP :</label>
+                            <input type="tel" name="nomor_handphone" class="form-control" placeholder="(+62)8" pattern="\+628[0-9]{8,12}" required>
+                            <small class="form-text text-muted">*harus 8-12 digit</small>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label><i class="fa-solid fa-location-dot ms-2 fa-"></i> Alamat :</label>
+                            <input type="text" name="alamat" class="form-control" placeholder="" required>
+                        </div>
+                        <div class="d-flex">
+                            <input type="submit" name="simpan" value="Simpan" class="btn btn-primary me-2">
+                            <a href="user.php" class="btn btn-warning">Kembali</a>
+                        </div>
+                    </form>
                     </div>
-                    <div class="form-group mt-1 ">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="" required>
-                    </div>
-                    <div class="form-group mt-1 ">
-                        <label>Role Akses</label>
-                        <select class="form-control" name="role_id" required>
-                            <option value="">Pilih Role Akses</option>
-                            <?php
-                            while ($row = mysqli_fetch_array($role)) { ?>
-                                <option value="<?= $row['id_role'] ?>"><?= $row['nama'] ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group mt-1 ">
-                        <label><i class="fa-solid fa-phone"></i> Nomor HP</label>
-                        <input type="tel" name="nomor_handphone" class="form-control" placeholder="" pattern="\+628[0-9]{8,12}" required>
-                        <small>Format: +628 (contoh: +62881122334), harus 8-12 digit</small>
-                        <br><br>
-                    </div>
-                    <div class="form-group mt-1 ">
-                        <label>Alamat</label>
-                        <input type="text" name="alamat" class="form-control" placeholder="" required>
-                    </div>
-                    <input type="submit" name="simpan" value="Simpan" class="btn btn-success">
-                    <a href="user.php" class="btn btn-primary">Kembali</a>
-                </form>
+                </div>
             </div>
-        </div>
+            
+            
     </div>
-
 </body>
 
 </html>

@@ -1,28 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         body {
             background: white;
             font-family: 'Poppins', 'sans-serif';
-            box-sizing: content-box;
         }
 
-        #side_nav {
-            min-width: 250px;
-            max-width: 250px;
-            /* box-shadow: black;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3); Shadow hanya di sisi kanan */
+        #top_nav {
+    position: fixed;
+    top: 0px;
+    left: 250px;
+    right: 0;
+    z-index: 1030;
+}
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            overflow-y: auto;
+            padding-top: 20px;
         }
 
-        .content {
-            min-height: 100vh;
-            width: 100%;
+        .sidebar ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .sidebar ul li {
+            padding-top : 20px;
         }
 
         .sidebar ul a {
             display: block;
             color: white;
             text-decoration: none;
-            padding: 10px;
+            padding-block: 10px;
+            padding-left: 10px;
             transition: background-color 0.3s, padding-left 0.3s;
         }
 
@@ -34,39 +49,22 @@
             color: black;
         }
 
-        .sidebar ul li {
-            margin-top: 1px;
-            list-style: none;
-        }
-
-        .sidebar ul li:first-child {
-            margin-top: 0;
+        .sidebar .header-box {
+            padding: 20px;
         }
 
         #orange {
             background-color: rgb(232, 127, 9);
         }
 
-        /* Tambahkan gaya CSS tambahan di sini */
-        .profile-dropdown .dropdown-toggle .fa-solid {
-            font-size: 2rem; /* Atur ukuran ikon profil di sini */
-
+        .table-responsive {
+            margin-top: 20px;
         }
+
+        .profile-dropdown .fa-user {
+            font-size: 2rem;
+        }
+
         .fa-hands {
             font-size: 3rem;
         }
-       
-        #top_nav {
-            /* background-color: #FF8C00; Warna oranye yang lebih terang */
-            border-radius: 8px;
-            
-
-            
-        }
-
-        /* li a {
-            border-radius: 12px;
-            border: rgb(232, 127, 9);
-            } */
-        
-        
