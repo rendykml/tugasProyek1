@@ -105,7 +105,7 @@ if (!$view) {
                     while ($row = $view->fetch_array()) {
                     ?>
                         <tr>
-                            <td><?= $row['id_produk'] ?></td>
+                            <th><?= $row['id_produk'] ?></th>
                             <td><?= $row['nama_produk'] ?></td>
                             <td><?= $row['harga'] ?></td>
                             <td><?= $row['jumlah'] ?></td>
