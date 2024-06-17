@@ -70,8 +70,8 @@ include 'auth_admincheck.php';
                             <h2><?= $_SESSION['nama_user']; ?>! <i class="fa-solid fa-hands"></i></h2>
                             <p>Silakan tambahkan pengguna atau produk:</p>
                             <div class="d-flex">
-                                <a href="user.php" class="btn btn-primary ms-2 me-2">Tambah User</a>
-                                <a href="produk.php" class="btn btn-success">Tambah Produk</a>
+                                <a href="user_add.php" class="btn btn-primary ms-2 me-2">Tambah User</a>
+                                <a href="produk_add.php" class="btn btn-success">Tambah Produk</a>
                                 <a href="logout.php" class="btn btn-danger ms-auto ">Logout</a>
                             </div>
                         </div>
