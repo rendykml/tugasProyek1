@@ -75,15 +75,16 @@ if (!$view) {
                         <div class="p-1 py-4 bg-light rounded">
                             <div class="container mt- ms-1">
                                 <h1>List Users</h1>
-                                <a href="produk_add.php" class="btn btn-primary ms-2 ">Tambah data</a>
+                                <a href="user_add.php" class="btn btn-primary ms-2 ">Tambah data</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <table class="table mt-1 ms-4">
+            <div class="container mt-3  table-responsive" >
+                <table class="table align-middle table-sm">
                 <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                    <div class="alert alert-success mt-2 mx-3 " role="alert">
+                    <div class="alert alert-success ps-4 " role="alert">
 
                         <?= $_SESSION['success'] ?>
 
@@ -91,8 +92,9 @@ if (!$view) {
                 <?php }
                 $_SESSION['success'] = "";
                 ?>
-                    <tr>
-                        <th>ID Users</th>
+                <thead class="table-light" >
+                <tr>
+                        <th class="ps-4"  >ID Users</th>
                         <th>Nama_User</th>
                         <th>Username</th>
                         <th>Password</th>
@@ -101,12 +103,15 @@ if (!$view) {
                         <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
+
+                </thead>
+                    
                     <?php
 
                     while ($row = $view->fetch_array()) { ?>
 
                         <tr>
-                            <th><?= $row['id_user'] ?></th>
+                            <th class="ps-5" ><?= $row['id_user'] ?></th>
                             <td><?= $row['nama_user'] ?></td>
                             <td><?= $row['username'] ?></td>
                             <td><?= $row['password'] ?></td>
@@ -121,6 +126,9 @@ if (!$view) {
                     <?php }
                     ?>
                 </table>
+
+            </div>
+                
             </div>
             <!-- /Content -->
         </div>

@@ -82,17 +82,18 @@ if (!$view) {
                     </div>
                 </div>
             </div>
-            <table class="table mt-1 ms-4 ">
+            <div class="container mt-3 table-responsive" >
+            <table class="table align-middle">
             <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                <div class="alert alert-success mt-2 mx-3 " role="alert">
+                <div class="alert alert-success ps-4" role="alert">
                     <?= $_SESSION['success'] ?>
                 </div>
             <?php }
             $_SESSION['success'] = "";
             ?>
-                <thead>
+                <thead class="table-light" >
                     <tr>
-                        <th>ID Produk</th>
+                        <th class="ps-4" >ID Produk</th>
                         <th>Nama</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
@@ -105,7 +106,7 @@ if (!$view) {
                     while ($row = $view->fetch_array()) {
                     ?>
                         <tr>
-                            <th><?= $row['id_produk'] ?></th>
+                            <th class="ps-5" ><?= $row['id_produk'] ?></th>
                             <td><?= $row['nama_produk'] ?></td>
                             <td><?= $row['harga'] ?></td>
                             <td><?= $row['jumlah'] ?></td>
@@ -118,6 +119,9 @@ if (!$view) {
                     <?php } ?>
                 </tbody>
             </table>
+
+            </div>
+            
         </div>
     </div>
 </div>
