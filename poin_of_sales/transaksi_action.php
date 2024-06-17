@@ -4,38 +4,44 @@ session_start();
 include 'auth_kasircheck.php';
 
 $bayar = preg_replace('/\D/', '', $_POST['bayar']);
-
-// print_r(preg_replace('/\D/','', $_POST['bayar']));
-
-// print_r($_SESSION['cart']);
-
 $tanggal_waktu = date('Y-m-d H:i:s');
 $nomor_transaksi = rand(111111, 999999);
 $total = $_POST['total'];
-$nama = $_SESSION['nama_user'];
+$nama_user = $_SESSION['nama_user'];
 $kembali = (int)$bayar - (int)$total;
 
-// insert ke tabel transaksi
+// Insert ke tabel transaksi
+$query_transaksi = "INSERT INTO transaksi (
+    id_transaksi, tanggal_waktu, nomor_transaksi, total, nama_user, bayar, kembali
+) VALUES (
+    '', '$tanggal_waktu', '$nomor_transaksi', '$total', '$nama_user', '$bayar', '$kembali'
+)";
 
-mysqli_query($dbconnect, "INSERT INTO transaksi(
-id_transaksi,tanggal_waktu,nomor_transaksi,total,nama,bayar,kembali) VALUES (NULL,'$tanggal_waktu','$nomor_transaksi,
-'$total','$nama','$bayar','$kembali')");
+// Eksekusi query dan cek hasilnya
+if (mysqli_query($dbconnect, $query_transaksi)) {
+    // Dapatkan ID transaksi yang baru dimasukkan
+    $id_transaksi = mysqli_insert_id($dbconnect);
 
-// mendapatkan id transaksi baru
-$id_transaksi = mysqli_insert_id($dbconnect);
+    // Insert ke tabel transaksi_detail
+    foreach ($_SESSION['cart'] as $key => $value) {
+        $id_produk = $value['id'];
+        $harga = $value['harga'];
+        $jumlah = $value['jumlah'];
+        $total_transaksi = $harga * $jumlah;
 
-// insert ke detail_transaksi
-foreach ($_SESSION['cart'] as $key => $value) {
-    $id_produk = $value['id'];
-    $harga = $value['harga'];
-    $jumlah = $value['jumlah'];
-    $total_dtransaksi = $harga * $jumlah;
+        $query_detail = "INSERT INTO transaksi_detail (
+            id_transaksi_detail, id_transaksi, id_produk, harga, jumlah, total
+        ) VALUES (
+            NULL, '$id_transaksi', '$id_produk', '$harga','$jumlah' , '$total_transaksi'
+        )";
 
-    mysqli_query($dbconnect, "INSERT INTO transaksi_detail (
-    id_transaksi_detail,id_transaksi,id_produk,harga,jumlah,total) VALUES (NULL,'$id_transaksi_detail','$id_transaksi',
-    'id_produk','$harga','jumlah','$total_dtransaksi') ");
+        mysqli_query($dbconnect, $query_detail);
+    }
 
-    // $sum += $value['harga']*$value['jumlah];
+    $_SESSION['cart'] = [];
+    header("location: transaksi_selesai.php?id_trx= $id_transaksi");
+    exit();
+} else {
+    // Tangani error, misalnya log pesan error
+    echo "Error: " . mysqli_error($dbconnect);
 }
-
-header("location:transaksi_selesai.php");

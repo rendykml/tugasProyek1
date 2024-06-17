@@ -1,3 +1,29 @@
+<?php
+include 'config.php';
+session_start();
+include 'auth_kasircheck.php';
+
+$id_trx = $_GET['id_trx'];
+
+$data = mysqli_query($dbconnect, "SELECT * FROM transaksi WHERE id_transaksi='$id_trx'");
+$trx = mysqli_fetch_assoc($data);
+$detail = mysqli_query($dbconnect, "SELECT transaksi_detail.*, produk.nama_produk FROM `transaksi_detail` INNER JOIN produk ON transaksi_detail.id_produk= produk.id_produk WHERE transaksi_detail.id_transaksi='$id_trx'");
+
+
+// if ($data) {
+//     $trx = mysqli_fetch_assoc($data);
+//     if (!$trx) {
+//         // Jika transaksi tidak ditemukan
+//         echo "Transaksi tidak ditemukan.";
+//     }
+// } else {
+//     // Jika query gagal
+//     echo "Query gagal.";
+// }
+// print_r($data);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +54,14 @@
                     Cikadut, Jawa Barat, 40121
                 </th>
             </tr>
-            <tr>
-                <td>05-01-2018 13:01 Yusuf</td>
+            <tr align="center">
+                <td>
+                    <hr>
+                </td>
+            </tr>
+            <tr> <!-- mengambil no transaksi, date time & nama username kasir -->
+                <td>No.#<?= $trx['nomor_transaksi'] ?> ||<?= date('d-m-Y H:i:s', strtotime($trx['tanggal_waktu'])) ?> <?= $trx['nama_user'] ?>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -38,40 +70,30 @@
             </tr>
         </table>
         <table width="500" border="0" cellpadding="3" cellspacing="0">
-            <tr>
-                <td>Nama</td>
-                <td>1</td>
-                <td align="right">1000</td>
-                <td align="right">1000</td>
-            </tr>
-            <tr>
-                <td>Nama</td>
-                <td>1</td>
-                <td align="right">1000</td>
-                <td align="right">1000</td>
-            </tr>
-            <tr>
-                <td>Nama</td>
-                <td>1</td>
-                <td align="right">1000</td>
-                <td align="right">1000</td>
-            </tr>
+            <?php while ($row = mysqli_fetch_array($detail)) { ?>
+                <tr>
+                    <td><?= $row['nama_produk'] ?></td>
+                    <td><?= $row['jumlah'] ?> item</td>
+                    <td align="right">harga satuan <?= number_format($row['harga']) ?></td>
+                    <td align="right"><?= number_format($row['total']) ?></td>
+                </tr>
+            <?php } ?>
             <tr>
                 <td colspan="4">
                     <hr>
                 </td>
             </tr>
             <tr>
-                <td align="right" colspan="3">Bayar</td>
-                <td align="right">10000</td>
+                <td align="right" colspan="3">Total Harga</td>
+                <td align="right"><?= number_format($trx['total']) ?></td>
             </tr>
             <tr>
                 <td align="right" colspan="3">Bayar</td>
-                <td align="right">10000</td>
+                <td align="right"><?= number_format($trx['bayar']) ?></td>
             </tr>
             <tr>
-                <td align="right" colspan="3">Bayar</td>
-                <td align="right">10000</td>
+                <td align="right" colspan="3">Kembalian</td>
+                <td align="right"><?= number_format($trx['kembali']) ?></td>
             </tr>
         </table>
         <table width="500" border="0" cellpadding="1" cellspacing="0">
