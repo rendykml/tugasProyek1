@@ -39,13 +39,13 @@ if (!$view) {
             </div>
             <ul class="list-unstyled px-2">
                 <li class="mt-3"><a class="text-decoration-none" href="index.php" id="dashboard-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class="mt-3"><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-user"></i> User</a></li>
+                <li class="mt-3"><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-users"></i> Users</a></li>
                 <li class="mt-3"><a class="text-decoration-none" href="produk.php" id="produk-link"><i class="fa-solid fa-list-check"></i> Produk</a></li>
             </ul>
         </div>
 
         <div class="content flex-grow-1 p-1 rounded ">
-            <nav class="navbar navbar-expand-lg p-2 bg-light" id="top_nav" >
+            <nav class="navbar navbar-expand-lg m-2 p-2 bg-light" id="top_nav" >
                 <div class="container-fluid">
                     <a class="navbar-brand text-black ps-4 " href="index.php"><i>Point Of Sales</i></a>
 
@@ -69,9 +69,21 @@ if (!$view) {
                     </div>
                 </div>
             </nav>
-            <div class="container mt-1 ms-3">
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="p-1 py-4 bg-light rounded">
+                            <div class="container mt- ms-1">
+                                <h1>List Users</h1>
+                                <a href="produk_add.php" class="btn btn-primary ms-2 ">Tambah data</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <table class="table mt-1 ms-4">
                 <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success mt-2 mx-3 " role="alert">
 
                         <?= $_SESSION['success'] ?>
 
@@ -79,9 +91,6 @@ if (!$view) {
                 <?php }
                 $_SESSION['success'] = "";
                 ?>
-                <h1 class="mt-3">List User</h1>
-                <a href="user_add.php" class="btn btn-primary">Tambah data</a>
-                <table class="table mt-3">
                     <tr>
                         <th>ID Users</th>
                         <th>Nama_User</th>
@@ -106,7 +115,7 @@ if (!$view) {
                             <td><?= $row['alamat'] ?></td>
 
                             <td>
-                                <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-primary">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>
+                                <a href="user_edit.php?id=<?= $row['id_user'] ?>" class="btn btn-warning">Edit</a> <a href="user_hapus.php?id=<?= $row['id_user'] ?>" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
                     <?php }

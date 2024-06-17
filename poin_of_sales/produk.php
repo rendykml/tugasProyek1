@@ -29,9 +29,8 @@ if (!$view) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="style/admin.js"></script>
 </head>
-
 <body>
-<div class="main-container d-flex">
+    <div class="main-container d-flex">
         <div class="sidebar bg-dark text-white" id="side_nav">
             <div class="header-box px-1 mt-4 mb-5">
                 <h1 class="fs-4">
@@ -41,30 +40,28 @@ if (!$view) {
             </div>
             <ul class="list-unstyled px-2">
                 <li class="mt-3"><a class="text-decoration-none" href="index.php" id="dashboard-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
-                <li class="mt-3"><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-user"></i> User</a></li>
+                <li class="mt-3"><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-users"></i> Users</a></li>
                 <li class="mt-3"><a class="text-decoration-none" href="produk.php" id="produk-link"><i class="fa-solid fa-list-check"></i> Produk</a></li>
             </ul>
         </div>
 
-        <div class="content flex-grow-1 p-1 rounded ">
-            <nav class="navbar navbar-expand-lg p-2 bg-light" id="top_nav" >
+        <div class="content flex-grow-1 p-1 rounded">
+            <nav class="navbar navbar-expand-lg m-2 p-2 bg-light" id="top_nav">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-black ps-4 " href="index.php"><i>Point Of Sales</i></a>
-
+                    <a class="navbar-brand text-black ps-4" href="index.php"><i>Point Of Sales</i></a>
                     <div class="collapse navbar-collapse justify-content-end">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
-                            <li class="nav-item dropdown profile-dropdown p-1 me-2 ">
+                            <li class="nav-item dropdown profile-dropdown p-1 me-2">
                                 <a class="nav-link dropdown-toggle d-flex align-items-center p-2 text-black" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="profileDropdown">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                     <li><a class="dropdown-item" href="index.php"><?= $_SESSION['nama_user']; ?></a></li>
                                     <li><a class="dropdown-item" href="index.php">user : <?= $_SESSION['username']; ?></a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item text-danger " href="logout.php">Logout</a></li>
+                                    <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -72,57 +69,57 @@ if (!$view) {
                 </div>
             </nav>
             <!-- Main Content -->
-            <div class="container mt-3 ms-3">
-                <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= $_SESSION['success'] ?>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="p-1 py-4 bg-light rounded">
+                            <div class="container mt- ms-1">
+                                
+                                <h1>List Produk</h1>
+                                <a href="produk_add.php" class="btn btn-primary ms-2 ">Tambah data</a>
+                            </div>
+                        </div>
                     </div>
-                <?php }
-                $_SESSION['success'] = "";
-                ?>
-                <h1>List Produk</h1>
-                <a href="produk_add.php" class="btn btn-primary">Tambah data</a>
-                <table class="table mt-3">
-                    <thead>
-                        <tr>
-                            <th>ID Produk</th>
-                            <th>Nama</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Looping data produk
-                        while ($row = $view->fetch_array()) {
-                        ?>
-                            <tr>
-                                <td><?= $row['id_produk'] ?></td>
-                                <td><?= $row['nama_produk'] ?></td>
-                                <td><?= $row['harga'] ?></td>
-                                <td><?= $row['jumlah'] ?></td>
-                                <td class="">
-                                    <!-- Link Edit dan Hapus -->
-                                    <a class="btn btn-primary" href="produk_edit.php?id=<?= $row['id_produk']; ?>">Edit</a>
-                                    <a class="btn btn-danger" href="produk_hapus.php?id=<?= $row['id_produk'] ?>">Hapus</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                </div>
             </div>
-            <!-- /Main Content -->
+            <table class="table mt-1 ms-4 ">
+            <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+                <div class="alert alert-success mt-2 mx-3 " role="alert">
+                    <?= $_SESSION['success'] ?>
+                </div>
+            <?php }
+            $_SESSION['success'] = "";
+            ?>
+                <thead>
+                    <tr>
+                        <th>ID Produk</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Jumlah</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Looping data produk
+                    while ($row = $view->fetch_array()) {
+                    ?>
+                        <tr>
+                            <td><?= $row['id_produk'] ?></td>
+                            <td><?= $row['nama_produk'] ?></td>
+                            <td><?= $row['harga'] ?></td>
+                            <td><?= $row['jumlah'] ?></td>
+                            <td>
+                                <!-- Link Edit dan Hapus -->
+                                <a class="btn btn-warning" href="produk_edit.php?id=<?= $row['id_produk']; ?>">Edit</a>
+                                <a class="btn btn-danger" href="produk_hapus.php?id=<?= $row['id_produk'] ?>">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
-        <!-- /Content -->
     </div>
-
-        </div>
-    </div>
-
-   
-    
-            
+</div>
 </body>
-
 </html>
