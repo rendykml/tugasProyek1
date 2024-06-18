@@ -1,18 +1,12 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 include 'config.php';
 session_start();
 include 'auth_admincheck.php';
 
-
-
 $role = mysqli_query($dbconnect, "SELECT * FROM role");
 
 if (isset($_POST['simpan'])) {
-    // echo var_dump($_POST);
-    // echo "Form subbmitted<br>";
+    // Ambil data dari form
     $nama = $_POST['nama_user'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -20,12 +14,32 @@ if (isset($_POST['simpan'])) {
     $nomor_handphone = $_POST['nomor_handphone'];
     $alamat = $_POST['alamat'];
 
-    mysqli_query($dbconnect, "INSERT INTO user_pengguna VALUES ( '','$nama','$username','$password','$role_id', '$nomor_handphone', '$alamat')");
-    $_SESSION['success'] = "Berhasil menambahkan user";
+    // Siapkan query untuk menambahkan pengguna baru
+    $query = "INSERT INTO user_pengguna (nama_user, username, password, role_id, nomor_handphone, alamat) 
+              VALUES ('$nama', '$username', '$password', '$role_id', '$nomor_handphone', '$alamat')";
+
+    try {
+        // Coba eksekusi query
+        if (mysqli_query($dbconnect, $query)) {
+            $_SESSION['success'] = "Berhasil menambahkan user";
+        } else {
+            throw new Exception(mysqli_error($dbconnect));
+        }
+    } catch (Exception $e) {
+        // Tangkap pesan error dan tampilkan sesuai jenis error
+        if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
+            $_SESSION['error'] = "Gagal menambahkan user (username sudah ada)";
+        } else {
+            $_SESSION['error'] = "Gagal menambahkan user (".$e->getMessage().")";
+        }
+    }
+
+    // Redirect ke halaman user
     header("location:user.php");
     exit();
-    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +111,7 @@ if (isset($_POST['simpan'])) {
                             <span class="input-group-text" id="basic-addon1">@</span>
                             <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                             <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-lock"></i></span>
-                            <input type="password" name="password" class="form-control" placeholder="masukan password" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="password" name="password" class="form-control" placeholder="masukan password" aria-label="Recipient's username" aria-describedby="basic-addon2" required >
                            
                         </div>   
                         
@@ -113,7 +127,7 @@ if (isset($_POST['simpan'])) {
                         </div>
                         <div class="form-group mb-4">
                             <label><i class="fa-solid fa-phone ms-2 me-1"></i> Nomor HP :</label>
-                            <input type="tel" name="nomor_handphone" class="form-control" placeholder="(+62)8" pattern="\+628[0-9]{8,12}" required>
+                            <input type="text" name="nomor_handphone" class="form-control" placeholder="(+62)8" pattern="\+62[0-9]{8,12}" required>
                             <small class="form-text text-muted">*harus 8-12 digit</small>
                         </div>
                         <div class="form-group mb-4">

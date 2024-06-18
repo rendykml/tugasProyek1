@@ -72,7 +72,7 @@ if (!$view) {
                 </div>
             </nav>
 
-            <div class="container mt-3">
+            <div class="container mt-4">
                 <div class="row">
                     <div class="col-12">
                         <div class="p-1 py-4 bg-light rounded">
@@ -87,12 +87,24 @@ if (!$view) {
 
             <div class="container mt-3 table-responsive">
                 <table class="table align-middle table-sm">
-                    <?php if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
-                        <div class="alert alert-success ps-4" role="alert">
-                            <?= $_SESSION['success'] ?>
-                        </div>
-                    <?php }
-                    $_SESSION['success'] = ""; ?>
+                <?php
+if (isset($_SESSION['success']) && $_SESSION['success'] != '') { ?>
+    <div class="alert alert-success ps-4" role="alert">
+        <?= $_SESSION['success'] ?>
+    </div>
+    <?php
+    unset($_SESSION['success']);
+}
+
+if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
+    <div class="alert alert-danger ps-4" role="alert">
+        <?= $_SESSION['error'] ?>
+    </div>
+    <?php
+    unset($_SESSION['error']);
+}
+?>
+
                     <thead class="table-light">
                         <tr>
                             <th class="ps-4">ID Users</th>

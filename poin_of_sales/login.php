@@ -59,7 +59,7 @@ if (isset($_POST['masuk'])) {
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
             <?php } ?>
-            <button type="submit" name="masuk" value="Masuk" class="btn btn-primary mt-3 ">Masuk</button>
+            <button type="submit" name="masuk" value="Masuk" class="btn btn-primary  ">Masuk</button>
         </form>
     </div>
 </body>
