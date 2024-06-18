@@ -37,12 +37,12 @@ if (isset($_POST['masuk'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="style/hal-login.css">
 </head>
 
-<body>
+<body class="bg-dark" >
     <div class="container-fluid">
-        <form method="post" class="mx-auto">
+        <form  method="post" class="mx-auto shadow-lg ">
             <h1 class="text-center">Login</h1>
             <div class="mb-3 mt-5">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
@@ -59,7 +59,7 @@ if (isset($_POST['masuk'])) {
                     <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
                 </div>
             <?php } ?>
-            <button type="submit" name="masuk" value="Masuk" class="btn btn-primary">Masuk</button>
+            <button type="submit" name="masuk" value="Masuk" class="btn btn-primary mt-3 ">Masuk</button>
         </form>
     </div>
 </body>
