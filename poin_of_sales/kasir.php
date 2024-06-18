@@ -36,7 +36,7 @@ if (isset($_SESSION['cart'])) {
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg shadow bg-light">
             <div class="container">
                 <a class="navbar-brand text-black" href="index.php"><h4><i>Point Of Sales</i></h4></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -68,26 +68,25 @@ if (isset($_SESSION['cart'])) {
                 <div class="col-md-8">
                     <h1>Kasir</h1>
                     <h2>Hi <?= $_SESSION['nama_user'] ?></h2>
-                    <a href="logout.php">logout</a> |
-                    <a href="reset_keranjang.php">Reset Keranjang</a>
-
                     <form method="post" action="keranjang_action.php" class="mt-4">
                         <div class="input-group mb-3 w-50 ">
-                            <select class="form-select" required name="id_produk">
+                            <select class="form-select shadow-sm " required name="id_produk">
                                 <option value="">Pilih Produk</option>
                                 <?php while ($row = mysqli_fetch_array($produk)) { ?>
                                     <option value="<?= $row['id_produk'] ?>"><?= $row['nama_produk'] ?></option>
                                 <?php } ?>
-                            </select>
-                            <input type="number" name="jumlah" class="form-control" placeholder="Jumlah" required>
-                            
+                            </select >
+                            <input type="number" name="jumlah" class="form-control shadow-sm" placeholder="Jumlah" required>
+                            <button class="btn btn-primary" type="submit">Tambah</button>
                         </div>
-                        <button class="btn btn-primary" type="submit">Tambah</button>
-                        <button type="submit" class="btn btn-success">Perbaharui</button>
                     </form>
-
+                    <a href="reset_keranjang.php">
+                        <button class="btn btn-warning" >Reset</button>
+                    </a>
+                    
                     <form method="post" action="keranjang_update.php">
-                        <table class="table table-bordered mt-4">
+                   
+                        <table class="table table-bordered shadow-sm mt-4">
                             <thead>
                                 <tr>
                                     <th>Nama</th>
@@ -112,20 +111,25 @@ if (isset($_SESSION['cart'])) {
                                 <?php } ?>
                             </tbody>
                         </table>
-                        
+                        <button type="submit" class="btn btn-success" action="keranjang_update.php" >Perbaharui</button>
                     </form>
-                </div>
-
+                </div>                     
                 <div class="col-md-4">
-                    <h3 class="mt-4">Total <?= number_format($sum) ?></h3>
-                    <form action="transaksi_action.php" method="POST">
-                        <input type="hidden" name="total" value="<?= $sum ?>">
-                        <div class="mb-3">
-                            <label for="bayar" class="form-label">Bayar</label>
-                            <input type="text" id="bayar" name="bayar" class="form-control">
+                    <div class="card my-3 shadow-sm " >
+                        <div class="card-header text-center ">
+                            <h3 class="mt-2">Total <?= number_format($sum) ?></h3>
                         </div>
-                        <button type="submit" class="btn btn-primary">Selesai</button>
-                    </form>
+                        <div class="card-body" >
+                        <form class=" " action="transaksi_action.php" method="POST">
+                            <input type="hidden" name="total" value="<?= $sum ?>">
+                            <div class="mb-3">
+                                <label for="bayar" class="form-label">Bayar : </label>
+                                <input class="shadow-sm form-control " type="text" id="bayar" name="bayar" class="form-control" required >
+                            </div>
+                                <button type="submit" class="btn btn-primary">Selesai</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

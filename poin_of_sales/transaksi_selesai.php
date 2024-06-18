@@ -31,19 +31,18 @@ $detail = mysqli_query($dbconnect, "SELECT transaksi_detail.*, produk.nama_produ
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Struk Kasir</title>
+    
     <style type="text/css">
         body {
             color: #a7a7a7;
         }
+        a {
+            
+            color: #a7a7a7;
+        }
     </style>
-    <!-- <script type="text/javascript">
-        $(document).ready(function() {
-            window.print();
-        });
-    </script> -->
+    
 </head>
-
-<!-- harusnya div align center -->
 
 <body>
     <div align="center">
@@ -103,7 +102,7 @@ $detail = mysqli_query($dbconnect, "SELECT transaksi_detail.*, produk.nama_produ
                 </td>
             </tr>
             <tr>
-                <th>Terimakasih, Selamat Belanja Kembali</th>
+                <th><a class="text-decoration-none" href="kasir.php">Terimakasih, Selamat Belanja Kembali</a></th>
             </tr>
             <tr>
                 <th>===== Layanan Konsumen =====</th>
@@ -113,8 +112,11 @@ $detail = mysqli_query($dbconnect, "SELECT transaksi_detail.*, produk.nama_produ
             </tr>
         </table>
     </div>
-
-
+    <script type="text/javascript">
+        window.onload = function() {
+            window.print();
+        };
+    </script>
 </body>
 
 </html>
