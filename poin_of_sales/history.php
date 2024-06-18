@@ -1,25 +1,17 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-session_start();
-include 'auth_admincheck.php';
-
-
 include 'config.php';
 
-if (isset($_POST['simpan'])) {
-    // echo var_dump($_POST);
-    echo "Form subbmitted<br>";
-    $nama = $_POST['nama_produk'];
-    $harga = $_POST['harga'];
-    $jumlah = $_POST['jumlah'];
+session_start();
 
-    mysqli_query($dbconnect, "INSERT INTO produk VALUES ('','$nama','$harga','$jumlah')");
-    $_SESSION['success'] = "Berhasil menambahkan Produk";
-    header("location:produk.php");
-    exit();
+include 'auth_admincheck.php';
+
+$view = $dbconnect->query("SELECT * FROM transaksi");
+
+if (!$view) {
+    die("Error menjalankan query: " . $dbconnect->error);
 }
+?>
+
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +25,7 @@ if (isset($_POST['simpan'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="style/admin.js" ></script>
     <link rel="stylesheet" href="style/admin-flex.css">
-    <link rel="stylesheet" href="style/admin.css">
-   
-  
+    <link rel="stylesheet" href="style/admin.css">  
     </style>
 </head>
 
@@ -77,42 +67,53 @@ if (isset($_POST['simpan'])) {
                     </div>
                 </div>
             </nav>
-            <div class="container">
-                <div class="card my-4">
-                    <div class="card-header text-center">
-                        <h1>Tambah Produk</h1>
-                    </div>
-                    <div class="card-body">
-                        <form action="" method="post">
-                            <div class="mb-3">
-                                <label for="nama_produk" class="form-label">Nama Produk:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa-solid fa-box"></i></span>
-                                    <input type="text" name="nama_produk" class="form-control" id="nama_produk" placeholder="Nama Produk" required>
-                                </div>
+        <!-- New container for welcome message and actions -->
+        <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="p-1 py-4 bg-light rounded">
+                            <div class="container ms-1 mt-1">
+                                <h1>Riwayat Transaksi</h1>
                             </div>
-                            <div class="mb-3">
-                                <label for="harga" class="form-label">Harga:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa-solid fa-money-bill"></i></span>
-                                    <input type="number" name="harga" class="form-control" id="harga" placeholder="Harga Produk" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="jumlah" class="form-label">Jumlah Stock:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa-solid fa-cubes"></i></span>
-                                    <input type="number" name="jumlah" class="form-control" id="jumlah" placeholder="Jumlah Stock" required>
-                                </div>
-                            </div>
-                            <div class="d-flex ">
-                                <button type="submit" name="simpan" class="btn btn-primary me-2 ">Simpan</button>
-                                <a href="produk.php" class="btn btn-warning">Kembali</a>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="container mt-3 table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">ID Transaksi</th>
+                            <th>Waktu Transaksi</th>
+                            <th>Nomor Transaksi</th>
+                            <th>Total Harga</th>
+                            <th>Nama Kasir</th>
+                            <th>Jumlah Bayar</th>
+                            <th>Kembalian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $view->fetch_array()) { ?>
+                            <tr>
+                                <th class="ps-5"><?= $row['id_transaksi'] ?></th>
+                                <td><?= $row['tanggal_waktu'] ?></td>
+                                <td><?= $row['nomor_transaksi'] ?></td>
+                                <td><?= $row['total'] ?></td>
+                                <td><?= $row['nama_user'] ?></td>
+                                <td><?= $row['bayar'] ?></td>
+                                <td><?= $row['kembali'] ?></td>
+                                <!-- <td>
+                                    Hapus
+                                    <a class="btn btn-danger" href="produk_hapus.php?id=<?= $row['id_produk'] ?>">Hapus</a>
+                                </td> -->
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
     </div>
 </body>
 

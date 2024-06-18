@@ -21,5 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('user-link').classList.add('active');
     } else if (currentPage === 'produk.php') {
         document.getElementById('produk-link').classList.add('active');
+    }else if (currentPage === 'history.php') {
+        document.getElementById('history-link').classList.add('active');
     }
 });

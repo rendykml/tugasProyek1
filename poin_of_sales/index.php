@@ -34,6 +34,7 @@ include 'auth_admincheck.php';
                 <li><a class="text-decoration-none" href="index.php" id="dashboard-link"><i class="fa-solid fa-house"></i> Dashboard</a></li>
                 <li><a class="text-decoration-none" href="user.php" id="user-link"><i class="fa-solid fa-users"></i> Users</a></li>
                 <li><a class="text-decoration-none" href="produk.php" id="produk-link"><i class="fa-solid fa-list-check"></i> Produk</a></li>
+                <li><a class="text-decoration-none" href="history.php" id="produk-link"><i class="fa-solid fa-box"></i> transaksi</a></li>
             </ul>
         </div>
 
