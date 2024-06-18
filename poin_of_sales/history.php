@@ -68,7 +68,7 @@ if (!$view) {
                 </div>
             </nav>
         <!-- New container for welcome message and actions -->
-        <div class="container mt-3">
+        <div class="container ">
                 <div class="row">
                     <div class="col-12">
                         <div class="p-1 py-4 bg-light rounded">
