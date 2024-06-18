@@ -115,7 +115,7 @@ if (isset($_SESSION['cart'])) {
                     </form>
                 </div>                     
                 <div class="col-md-4">
-                    <div class="card my-3 shadow-sm " >
+                    <div class="card my-3" >
                         <div class="card-header text-center ">
                             <h3 class="mt-2">Total <?= number_format($sum) ?></h3>
                         </div>
@@ -124,7 +124,7 @@ if (isset($_SESSION['cart'])) {
                             <input type="hidden" name="total" value="<?= $sum ?>">
                             <div class="mb-3">
                                 <label for="bayar" class="form-label">Bayar : </label>
-                                <input class="shadow-sm form-control " type="text" id="bayar" name="bayar" class="form-control" required >
+                                <input class="shadow-s form-control " type="text" id="bayar" name="bayar" class="form-control" required >
                             </div>
                                 <button type="submit" class="btn btn-primary">Selesai</button>
                             </form>
