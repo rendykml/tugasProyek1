@@ -51,74 +51,78 @@ if (isset($_POST['update'])) { // Jika form disubmit dengan tombol "Update"
         $stmt_update_user = $dbconnect->prepare($sql_update_user);
         $stmt_update_user->bind_param("ssssssi", $nama, $username, $password, $role_id, $nomor_handphone, $alamat, $id);
 
-        $_SESSION['success'] = 'berhasil mengubah user';
+        if ($stmt_update_user->execute()) { // Eksekusi statement dan cek apakah berhasil
+            $_SESSION['success'] = 'berhasil mengubah user';
+        } else {
+            $_SESSION['error'] = 'Gagal mengubah user';
+        }
         $stmt_update_user->close();
         header("location:user.php");
         exit();
     }
 }
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Perbaharui User</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbaharui User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-    <body>
-        <div class="container">
-            <h1>Perbaharui User</h1>
+<body>
+    <div class="container">
+        <h1>Perbaharui User</h1>
 
-            <form method="post">
-            <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
-            <div class="alert alert-danger" role="alert">
-                <?= $_SESSION['error'] ?>
-            </div>
-        <?php } ?>
-                <input type="hidden" name="id_user" value="<?= isset($data['id_user']) ? $data['id_user'] : '' ?>">
-                <div class="form-group">
-                    <label>Nama User</label>
-                    <input type="text" name="nama_user" class="form-control" placeholder="Nama User" value="<?= isset($data['nama_user']) ? $data['nama_user'] : '' ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?= isset($data['username']) ? $data['username'] : '' ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" name="password" class="form-control" placeholder="Password" value="<?= isset($data['password']) ? $data['password'] : '' ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Role Akses</label>
-                    <select class="form-control" name="role_id" required>Pilih Role Akses
-                        <option value="">Pilih Role Akses</option>
-                        <?php
-                        while ($row = mysqli_fetch_array($role)) { ?>
-                            <option value="<?= $row['id_role'] ?>" <?= $row['id_role'] == $data['role_id'] ? 'selected' : '' ?>><?= $row['nama'] ?></opsion>
-                            <?php } ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nomor HP</label>
-                    <input type="text" name="nomor_handphone" class="form-control" pattern="(\+62[0-9]{8,12}" required value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
-                    <small>Format: (+62) berisi 8-12 digit. Misalnya: +62812345678</small>
-                    <br><br>
-                </div>
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?= isset($data['alamat']) ? $data['alamat'] : '' ?>" required>
-                </div>
-                <input type="submit" name="update" value="Perbaharui" class="btn btn-primary">
-                <a href="user.php" class="btn btn-warning">Kembali</a>
-            </form>
+        <form method="post">
+        <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $_SESSION['error'] ?>
         </div>
-    </body>
+        <?php } ?>
+            <input type="hidden" name="id_user" value="<?= isset($data['id_user']) ? $data['id_user'] : '' ?>">
+            <div class="form-group">
+                <label>Nama User</label>
+                <input type="text" name="nama_user" class="form-control" placeholder="Nama User" value="<?= isset($data['nama_user']) ? $data['nama_user'] : '' ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" value="<?= isset($data['username']) ? $data['username'] : '' ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" name="password" class="form-control" placeholder="Password" value="<?= isset($data['password']) ? $data['password'] : '' ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Role Akses</label>
+                <select class="form-control" name="role_id" required>
+                    <option value="">Pilih Role Akses</option>
+                    <?php
+                    while ($row = mysqli_fetch_array($role)) { ?>
+                        <option value="<?= $row['id_role'] ?>" <?= $row['id_role'] == $data['role_id'] ? 'selected' : '' ?>><?= $row['nama'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nomor HP</label>
+                <input type="text" name="nomor_handphone" class="form-control" pattern="(\+62[0-9]{8,12}" required value="<?= isset($data['nomor_handphone']) ? $data['nomor_handphone'] : '' ?>">
+                <small>Format: (+62) berisi 8-12 digit. Misalnya: +62812345678</small>
+                <br><br>
+            </div>
+            <div class="form-group">
+                <label>Alamat</label>
+                <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?= isset($data['alamat']) ? $data['alamat'] : '' ?>" required>
+            </div>
+            <input type="submit" name="update" value="Perbaharui" class="btn btn-primary">
+            <a href="user.php" class="btn btn-warning">Kembali</a>
+        </form>
+    </div>
+</body>
 
-    </html>
-    <?php
-    // Hapus pesan error setelah ditampilkan
-    unset($_SESSION['error']);
-    ?>
+</html>
+<?php
+// Hapus pesan error setelah ditampilkan
+unset($_SESSION['error']);
+?>
