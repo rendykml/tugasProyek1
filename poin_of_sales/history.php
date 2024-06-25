@@ -65,7 +65,7 @@ if (!$view) {
                 </div>
             </nav>
             
-            <div class="container">
+            <div class="container mt-4 ">
                 <div class="row">
                     <div class="col-12">
                         <div class="p-1 py-4 bg-light rounded">

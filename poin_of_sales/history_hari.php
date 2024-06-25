@@ -28,13 +28,19 @@ if (!$view) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style/admin.css">
+    <style>
+        a {
+            
+            color: black;
+        }
+    </style>
 </head>
 
 <body onload="window.print()">
-    <div class="container mt-3">
-        <div class="table-responsive">
-            <h2>Riwayat Transaksi - <?= date('d M Y', strtotime($date)) ?></h2>
-            <table class="table align-middle">
+    <div class="container">
+        <div class="table-responsive mt-4 ">
+            <a class="text-center" href="history.php"><h2>Riwayat Transaksi - <?= date('d M Y', strtotime($date)) ?></h2></a>
+            <table class="table align-middle mt-3">
                 <thead class="table-light">
                     <tr>
                         <th class="ps-3">ID Transaksi</th>
