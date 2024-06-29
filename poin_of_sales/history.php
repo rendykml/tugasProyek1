@@ -24,6 +24,22 @@ if (!$view) {
     <script src="style/admin.js" ></script>
     <link rel="stylesheet" href="style/admin-flex.css">
     <link rel="stylesheet" href="style/admin.css">  
+    <style>
+        .input-field {
+        position: relative;
+        display: inline-block;
+
+    }
+
+        .input-field > label {
+            position: absolute;
+            left: 0.5em;
+            top: 50%;
+            margin-top: -0.5em;
+            opacity: 0.5;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -64,20 +80,24 @@ if (!$view) {
                     </div>
                 </div>
             </nav>
-            
-            <div class="container mt-4 ">
+<!-- konten riwayat transaksi -->
+            <div class="container mt-4">
                 <div class="row">
                     <div class="col-12">
                         <div class="p-1 py-4 bg-light rounded">
                             <div class="container ms-1 mt-1">
                                 <h1>Riwayat Transaksi</h1>
+                                <p>Pilih tanggal transaksi</p>
+                                <div class=" input-field input-group mb-3 w-50 ">
+                                    <input type="date" class="form-control w-50 shadow-sm " id="datePicker" onchange="filterByDate()" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container mt-3">
+            <div class="container mt-3" id="transaction-container">
                 <?php
                 $current_date = "";
                 while ($row = $view->fetch_array()) {
@@ -91,7 +111,7 @@ if (!$view) {
                                   </div>";
                         }
                         $current_date = $date;
-                        echo "<div class='table-responsive'>";
+                        echo "<div class='table-responsive' data-date='$current_date'>";
                         echo "<h2>" . date('d M Y', strtotime($current_date)) . "</h2>";
                         echo "<table class='table align-middle'>";
                         echo "<thead class='table-light'>
@@ -126,6 +146,22 @@ if (!$view) {
                 }
                 ?>
             </div>
+        </div>
+    </div>
+
+    <script>
+        function filterByDate() {
+            var selectedDate = document.getElementById("datePicker").value;
+            var tables = document.querySelectorAll("#transaction-container .table-responsive");
+            tables.forEach(function(table) {
+                if (table.getAttribute("data-date") === selectedDate) {
+                    table.style.display = "block";
+                } else {
+                    table.style.display = "none";
+                }
+            });
+        }
+    </script>
         </div>
     </div>
 </body>
